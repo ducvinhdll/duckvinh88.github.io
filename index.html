@@ -1,0 +1,445 @@
+<?php require_once('anti-ddos.php'); ?>
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Test </title> 
+      <style>
+        body {
+            background-image: url(" https://i.imgur.com/tv69yjo.jpg");
+            background-repeat: repeat;
+            background-size: 100%;
+        }
+
+        .container {
+            max-width: 512px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        .container:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(to right, #00ced1, #7fffd4);
+            z-index: -1;
+            border-radius: 5px;
+        }
+
+        .container:after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(to right, #7fffd4, #00ced1);
+            z-index: -2;
+            border-radius: 5px;
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            background-color: #0066FF;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-label:hover {
+            background-color: #0052CC;
+        }
+
+        .file-name {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .upload-button {
+            margin-top: 20px;
+        }
+
+        .upload-button input[type="submit"] {
+            background-color: #7FFFD4;
+            color: #F0FFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button input[type="submit"]:hover {
+            background-color: #00CED1;
+        }
+
+        .tip {
+            color: #00008B;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .content {
+            color: #000000;
+            font-size: 14px;
+            text-align: left;
+            margin-top: 10px;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .Dvinh-Trick {
+             color: #000000;
+             font-size: 14px;
+             text-align: left;
+             margin-top: 10px;
+             background-color: #C0C0C0;
+             padding:10px;
+             border-radius: 5px;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+         } 
+      
+      .o-Dev{
+        font-family: Braah One;
+          color: #fff;
+          padding: 0;
+          font-size: 20px;
+          line-height: 1.8;
+          margin-bottom: 0;
+          margin-top: -3px;
+          text-shadow: 3px 0 8px #fff
+      }
+        .audio-player {
+            margin-top: 20px;
+        }
+
+        .audio-player audio {
+            width: 100%;
+        }
+
+        .ip-address {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #000000;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <style>
+body.loading .loading-modal{display:block}
+
+.dropzone{border:2px dashed #999;border-radius:10px;position:relative;margin:0 auto;clear:both;}
+
+.infoimg{margin:0 auto;margin-top:20px;margin-bottom:20px}
+
+.dropzone p{margin:0;text-align:center;width:100%;font-weight:bold;color:#999}
+
+.input{height:100%;left:0;outline:0;opacity:0;position:absolute;top:0;width:100%;cursor:-webkit-zoom-in}
+
+.status{border-radius:5px;text-align:center;margin-left:auto;margin-right:auto}
+
+.image-url{width:calc(100% - 10px);padding:5px;border:1px solid #999;border-radius:5px;color:#999}
+
+.linkimg{margin:20px 0}
+
+.dropzone.dropzone-dragging{border-color:#000}
+
+.loading-modal{background-color:rgba(255,255,255,.8);display:none;position:fixed;z-index:1000;top:0;left:0;height:100%;width:100%}
+
+.loading-table{margin-left:auto;margin-right:auto;margin-top:15%;margin-bottom:15%}
+
+</style>
+<style>
+  @-webkit-keyframes my {
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff;  } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @-moz-keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ }
+ @-o-keyframes my { 
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff; } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ } 
+ .test {
+         background:#3d3d3d;
+         font-size:24px;
+         font-weight:bold;
+	 -webkit-animation: my 700ms infinite;
+	 -moz-animation: my 700ms infinite; 
+	 -o-animation: my 700ms infinite; 
+	 animation: my 700ms infinite;
+}
+ </style> 
+<p class="test"> Le Duc Vinh - Upload Img</p>
+ <div class="content"> 
+   <div class="tip">
+    Tip- Social Networking
+   </div> 
+   <div class="content">
+    <div class="alert alert-primary">
+  Social network: <a href=" https://www.facebook.com/super.ducvinh.fun209?mibextid=2JQ9oc"><b>Le Duc Vinh </b></a><br>
+  Telegram: <a href="https://t.me/ducvinhdll"><b>@ducvinhdll</b></a>
+</div>
+    </div>
+   <div class="content">
+    You can only upload images in PNG, JPG, BMP, GIF format
+   </div> 
+   <div class="content">
+    You can only upload images smaller than 10MB in size
+   </div> 
+   <div class="content">
+    Once the upload is complete, copy the link to download
+   </div> 
+  </div> 
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div Class="Dvinh-Trick">
+<div class="o-Dev">
+<h2 style="text-align: center;">
+<b><span>Upload Your Photo Online And Get Working And Short Link</span></b></h2>
+<div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"></></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><b><span>Upload Your Photo Online And Get Working And Short Link</span></b></td></tr>
+</tbody></table>
+</div>
+  <br />
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.1.js" type="text/javascript"></script>
+<!--zzImgUr plugin has updated js dropbox without re-upload because it does not delete--> <script src="https://kenbtec.github.io/uploadImg/upload.js" type="text/javascript"></script><style>
+    /*
+ * jQuery plugin zzImgUr ver 1.6 by AnhTuanBlog
+ * http://ngohoanganhtuan.net/
+ */
+    .imgur_Zzbv,.imgur_Zzbv *{box-sizing:content-box;-moz-boxsizing:content-box;-webkit-box-sizing:content-box;margin:0;padding:0}
+    .imgur_Zzbv input{-webkit-user-select:initial;-moz-user-select:initial;-ms-user-select:initial;user-select:initial}
+    .imgur_Zzbv{height:auto}
+    .imgur_Zzbv-iconError,.imgur_Zzbv-iconDevs,.imgur_Zzbv-delete,.imgur_Zzbv-remove,.imgur_Zzbv-iconSelect,.imgur_Zzbv-button div img,.imgur_Zzbv-iconComplete,.imgur_Zzbv-iconImage{display:inline-block;background:url(https://i.imgur.com/e9GpBzF.png) no-repeat center center;width:16px;height:16px;float:left;margin:12px}
+    .imgur_Zzbv-iconDevs{background-position:0 0}
+    .imgur_Zzbv-iconComplete{background-position:-32px -16px}
+    .imgur_Zzbv-status img{}
+    .imgur_Zzbv-iconError{background-position:0 -32px}
+    .imgur_Zzbv-iconSelect{background-position:0 -16px}
+    .imgur_Zzbv-iconUpload{background-position:-16px -16px}
+    .imgur_Zzbv-button div img.imgur_Zzbv-iconReset{background-position:-16px 0}
+    .imgur_Zzbv-iconImage{background-position:-16px -32px}
+    .imgur_Zzbv-iconImage.imgur_Zzbv-iconUrl{background-position:-32px -32px}
+    .imgur_Zzbv-mode{cursor:pointer;width:40px;height:40px;float:left;background-color:#FF475D}
+    .imgur_Zzbv-mode.imgur_Zzbv-zzURL{background-color:#0B704C}
+    .imgur_Zzbv-button div{cursor:pointer;background-color:#359BED;border:0;height:40px;display:none;padding:0 10px;margin-left:-59px}
+    .imgur_Zzbv-button .imgur_Zzbv-reset{background-color:#27ad61}
+    .imgur_Zzbv-delete,.imgur_Zzbv-remove{background-position:-32px 0;position:absolute;right:3px;top:3px;height:16px;width:16px;text-indent:-9999px;overflow:hidden;background-color:transparent;margin:0}
+    .imgur_Zzbv-control{position:relative;height:40px;line-height:40px;overflow:hidden;background:#3a5795;color:#FFF}
+    .imgur_Zzbv-preview{overflow-y:auto;overflow-x:hidden}
+    .imgur_Zzbv-li{background:#fff;list-style-type:none;position:relative;height:120px;border-top:1px solid #DDD;overflow:hidden;border:2px solid #bbb}
+    .imgur_Zzbv-li:first-child{border-top:0 none}
+    .imgur_Zzbv-li:nth-child(2n){background:#E7E6E6}
+    .imgur_Zzbv-li:hover{background:#fff;color:#333}
+    .imgur_Zzbv-li.imgur_Zzbv-success{background:#FFFFA1}
+    .imgur_Zzbv-image{width:100px;overflow:hidden;position:absolute;height:113px;margin:10px}
+    .imgur_Zzbv-image img{max-width:100%;max-height:100%;position:absolute;top:0;right:0;bottom:0;left:0}
+    .imgur_Zzbv-info{position:absolute;left:140px;top:10px;right:10px;height:110px}
+    .imgur_Zzbv-info > *{white-space:nowrap}
+    .imgur_Zzbv-dl{line-height:34px}
+    .imgur_Zzbv-dl > div{height:34px}
+    .imgur_Zzbv-dt{float:left;width:70px;font-weight:400;font-size:14px}
+    .imgur_Zzbv input.imgur_Zzbv-input{width:calc(100% - 84px)!important;height:16px!important;line-height:16px!important;margin:8px 0!important;padding:0!important}
+    .imgur_Zzbv-status{position:absolute;width:16px;height:16px;line-height:16px;left:10px;display:none}
+    .imgur_Zzbv-add{cursor:pointer;position:absolute;width:140px;height:40px;overflow:hidden;background:#27ad60;left:40px;top:0;z-index:1}
+    .imgur_Zzbv-upload-URL.imgur_Zzbv-add{background:#C100E6}
+    .imgur_Zzbv-textSelect{font-size:15px;position:absolute;width:100%;left:34px;height:40px;line-height:40px}
+    .imgur_Zzbv-choose{cursor:pointer;z-index:10;opacity:0;filter:alpha(opacity=0);-moz-opacity:0;font-size:300px;height:1000px;right:0;top:0;position:absolute}
+    .imgur_Zzbv-length{position:absolute;width:50px;text-align:center;top:0;left:50%;margin-left:-25px;display:none}
+    .imgur_Zzbv-button{position:absolute;width:100px;right:0;top:0;white-space:nowrap;z-index:10}
+    .imgur_Zzbv-mode:hover,.imgur_Zzbv-button div:hover,.imgur_Zzbv-add:hover{background-color:#333}
+    .imgur_Zzbv-devs-icon{position:absolute;right:0;top:0;line-height:16px}
+    .imgur_Zzbv-tip{height:30px;font-size:15px;font-style:normal;line-height:30px;margin-bottom:20px}
+    .imgur_Zzbv-tip img{vertical-align:middle;float:none;margin:-4px 0 0}
+    .imgur_Zzbv-wrap-progress{background:#f8f8f8;height:3px;border:0;position:absolute;bottom:0;left:-141px;right:-10px}
+    .imgur_Zzbv-progress{height:3px;background:red;width:1px}
+    .imgur_Zzbv-errorURL{color:red}
+    .imgur_Zzbv input.imgur_Zzbv-imageURL{width:calc(100% - 11px)!important;border:0 none!important;box-shadow:0 0 0 1px #DDD!important;height:16px!important;line-height:16px!important;margin:0 0 0 1px!important}
+    .imgur_Zzbv-mini .imgur_Zzbv-button,.imgur_Zzbv-mini .imgur_Zzbv-add{width:40px}
+    .imgur_Zzbv-mini .imgur_Zzbv-info{left:10px}
+    .imgur_Zzbv-mini .imgur_Zzbv-wrap-progress{left:-10px}
+    .imgur_Zzbv-upload-URL,.imgur_Zzbv-mini .imgur_Zzbv-image{display:none}
+  </style>   <script type="text/javascript">//<![CDATA[
+$(function(){
+$(".upload").zzImgUr({
+    cliendID: "74f5c858f447bb9",
+    mode: "file",
+    format: "o,",
+    css: {
+        width: "100%"
+    },
+    max: 10,
+    loading: "http://i.imgur.com/m3NXDa6.gif",
+    lang: {
+        noID: "Unregistered application",
+      addImage: "Choose photo",
+      addURL: "Add the URL",
+      reset: "Refresh",
+      upload: "Upload",
+      choose: "Selected",
+      waitConnect: "Connecting...",
+      waitUpload: "Uploading in progress...",
+      noteURL: "Enter the image URL here:",
+      errContact: '<a href="https://www.ngohoanganhtuan.net/" rel="nofollow" target="_blank">Click here</a> to report an error.',
+      errURL: "The URL is not accessible.",
+      errSize: "Error URL or size is too small.",
+      errRepeat: "The URL is invalid or already in use."
+    },
+    success: function (firstVal, arrVal) {
+        console.log(firstVal);
+        console.log(arrVal);
+    },
+    input: function (arrInput) {
+        console.log(arrInput);
+        arrInput.click(function () {
+            this.select();
+            console.log(this);
+        });
+    },
+    remove: function (firstVal, arrVal) {
+        console.log(firstVal);
+        console.log(arrVal);
+    }
+});
+});//]]>
+</script>
+
+<div class="upload">
+<div class="imgur_Zzbv" style="width: 100%;">
+<div class="imgur_Zzbv-control">
+<div class="imgur_Zzbv-mode">
+<img alt="Image" class="imgur_Zzbv-iconImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="height: 16px; width: 16px;" /></div>
+<div class="imgur_Zzbv-status">
+<img alt="loading..." src="https://i.imgur.com/m3NXDa6.gif" /></div>
+<div class="imgur_Zzbv-upload-computer imgur_Zzbv-add">
+<img alt="Select" class="imgur_Zzbv-iconSelect" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="height: 16px; width: 16px;" />
+<div class="imgur_Zzbv-textSelect">
+Chọn ảnh</div>
+<input class="imgur_Zzbv-choose" multiple="multiple" type="file" /><br /></div>
+<div class="imgur_Zzbv-upload-URL imgur_Zzbv-add" style="display: none;">
+<div class="imgur_Zzbv-iconSelect">
+</div>
+<div class="imgur_Zzbv-textSelect">
+Thêm URL</div>
+</div>
+<div class="imgur_Zzbv-length" style="display: none;">
+<span class="imgur_Zzbv-complete">0</span> / <span class="imgur_Zzbv-selected">0</span></div>
+<div class="imgur_Zzbv-button">
+<div class="imgur_Zzbv-reset">
+<img alt="Reset" class="imgur_Zzbv-iconReset" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="height: 16px; width: 16px;" />Làm mới</div>
+<div class="imgur_Zzbv-upload" style="display: none;">
+<img alt="Upload" class="imgur_Zzbv-iconUpload" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="height: 16px; width: 16px;" />Tải lên</div>
+</div>
+</div>
+<div class="imgur_Zzbv-preview">
+<div class="imgur_Zzbv-list">
+</div>
+</div>
+</div>
+</div>
+</div>
+<h2 style="text-align: center;">
+<b><span> You used the "UPLOAD IMAGE TO GET IMAGE LINK" tool. Thank you.</span></b></h2>
+</div>
+</div>
+</div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>  
+  <div class="Dvinh-Trick"
+   <p> <div class="test"> Post to get IP address: IP Loading... </div></p>
+    <style>
+        /* Add your own styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .copyright-banner {
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            text-align: center;
+        }
+    </style> 
+ </head> 
+ 
+<script>
+       function VietKhanhStart() {
+        audio.play();
+      }
+      const VietKhanh_List = [     
+"//files.catbox.moe/9l1tw8.mp3", //muon roi ma sao con
+"//files.catbox.moe/s96pjb.mp3", //gorh
+];
+//Random music
+let index = Math.floor(Math.random() * VietKhanh_List.length);
+const audio = new Audio(VietKhanh_List[index]);
+function VietKhanhAudio() {
+  audio.play();
+}
+document.addEventListener("click", VietKhanhAudio);
+audio.addEventListener("ended", function() {
+  index = (index + 1) % VietKhanh_List.length;
+  audio.src = VietKhanh_List[index];
+  audio.play();
+});
+      </script>
+      
+      
+ <body> 
+  <!-- Your website content goes here --> 
+  <!-- Copyright banner --> 
+  <div class="copyright-banner"> 
+   <p>© 2023 Le Duc Vinh  Website. All rights reserved. | Website Created and edited by Le Duc Vinh | General website of Le Duc Vinh </p></div>
+     <script src="https://giabaodev.otzo.com/prf3/hoa-roi.js"></script>
+ </body>
+  </html>
+ 
